@@ -1,15 +1,30 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        FilaDePrioridade<Paciente> filaAtendimento = new FilaDePrioridade<>();
+        System.out.println("Cenário 1: Atendimento de Pacientes (Lista Ordenada)");
+        filaAtendimento.enfileirar(new Paciente("Carlos", 3));
+        filaAtendimento.enfileirar(new Paciente("Maria", 5));
+        filaAtendimento.enfileirar(new Paciente("Ana", 8));
+        filaAtendimento.enfileirar(new Paciente("Sofia", 10));
+        System.out.println("Próximo paciente: " + filaAtendimento.espiar());
+        while (!filaAtendimento.estaVazia()) {
+            System.out.println("Atendendo: " + filaAtendimento.desenfileirar());
+        }
+
+        Comparator<Tarefa> tarefaComparator = (t1, t2) ->
+                Integer.compare(t1.prioridade, t2.prioridade);
+
+        FilaDePrioridade<Tarefa> filaTarefas = new FilaDePrioridade<>(tarefaComparator);
+        System.out.println("\nCenário 2: Gerenciamento de Tarefas (Lista Ordenada)");
+        filaTarefas.enfileirar(new Tarefa("Estudar", 2));
+        filaTarefas.enfileirar(new Tarefa("Trabalhar", 5));
+        filaTarefas.enfileirar(new Tarefa("Academia", 3));
+        System.out.println("Próxima tarefa: " + filaTarefas.espiar());
+        while (!filaTarefas.estaVazia()) {
+            System.out.println("Executando: " + filaTarefas.desenfileirar());
         }
     }
 }

@@ -1,4 +1,15 @@
-package PACKAGE_NAME;
+class Tarefa {
+    String descricao;
+    int prioridade;
 
-public class Tarefa {
+    public Tarefa(String descricao, int prioridade) {
+        this.descricao = descricao;
+        this.prioridade = prioridade;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarefa{" + "descricao='" + descricao + '\'' +
+                ", prioridade=" + prioridade + '}';
+    }
 }
